@@ -1,5 +1,6 @@
 #define chave  ((PINB)&0b11110)
 
+
 void setup()
 {
   DDRD |= (1<<PD3);
@@ -30,6 +31,10 @@ void loop()
         if(chave == 0b10010)
           estado = 2;
       }
+      else if(!(chave == 0b11010))
+      {
+          estado=0;
+      }
     break;
 
     case 2:
@@ -39,6 +44,10 @@ void loop()
         if(chave == 0b00010)
           estado = 3;
       }
+      else if(!(chave == 0b10010))
+      {
+          estado=0;
+      }
     break;
 
     case 3:
@@ -48,10 +57,18 @@ void loop()
         if(chave == 0b00000)
           estado = 4;
       }
+      else if(!(chave == 0b00010))
+      {
+          estado=0;
+      }
     break;
 
     case 4:
       PORTD |= (1<<PD3);
+      if(!(chave == 0b00000))
+      {
+          estado=0;
+      }
     break;
 
     default:
